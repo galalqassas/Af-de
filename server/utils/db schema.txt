@@ -5,6 +5,7 @@ DROP DATABASE IF EXISTS scholar;
 CREATE DATABASE scholar;
 USE scholar;
 
+-- Creating the student table
 CREATE TABLE student (
     student_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE student (
     email VARCHAR(255) UNIQUE NOT NULL
 );
 
+-- Creating the teacher table
 CREATE TABLE teacher (
     teacher_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE teacher (
     designation VARCHAR(100)
 );
 
-
+-- Creating the course table
 CREATE TABLE course (
     course_id INT AUTO_INCREMENT PRIMARY KEY,
     course_name VARCHAR(255) NOT NULL,
@@ -37,6 +39,7 @@ CREATE TABLE course (
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE SET NULL
 );
 
+-- Creating the parent table
 CREATE TABLE parent (
     parent_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -46,6 +49,7 @@ CREATE TABLE parent (
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE
 );
 
+-- Creating the admin table
 CREATE TABLE admin (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -53,7 +57,7 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL
 );
 
-
+-- Creating the enrollment table
 CREATE TABLE enrollment (
     enrollment_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -63,6 +67,7 @@ CREATE TABLE enrollment (
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE
 );
 
+-- Creating the payment table
 CREATE TABLE payment (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -77,8 +82,7 @@ CREATE TABLE payment (
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
-
-
+-- Creating the quiz table with new question and answer columns
 CREATE TABLE quiz (
     quiz_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -86,10 +90,16 @@ CREATE TABLE quiz (
     max_score INT NOT NULL,
     post_date DATE NOT NULL,
     deadline DATE NOT NULL,
+    question TEXT, 
+    answer TEXT, 
+    option_a TEXT,
+    option_b TEXT,
+    option_c TEXT,
+    option_d TEXT,
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
-
+-- Creating the student_quiz_progress table
 CREATE TABLE student_quiz_progress (
     progress_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -101,6 +111,7 @@ CREATE TABLE student_quiz_progress (
     FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id) ON DELETE CASCADE
 );
 
+-- Creating the course_content table
 CREATE TABLE course_content (
     content_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -110,6 +121,7 @@ CREATE TABLE course_content (
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
+-- Creating the course_assessment table
 CREATE TABLE course_assessment (
     assessment_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -120,6 +132,7 @@ CREATE TABLE course_assessment (
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
+-- Creating the student_progress table
 CREATE TABLE student_progress (
     progress_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -133,12 +146,14 @@ CREATE TABLE student_progress (
     FOREIGN KEY (assessment_id) REFERENCES course_assessment(assessment_id) ON DELETE SET NULL
 );
 
+-- Creating the badge table
 CREATE TABLE badge (
     badge_id INT AUTO_INCREMENT PRIMARY KEY,
     badge_name VARCHAR(255) NOT NULL,
     badge_description TEXT NOT NULL
 );
 
+-- Creating the student_badge table
 CREATE TABLE student_badge (
     student_badge_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -148,6 +163,7 @@ CREATE TABLE student_badge (
     FOREIGN KEY (badge_id) REFERENCES badge(badge_id) ON DELETE CASCADE
 );
 
+-- Creating the course_rating table
 CREATE TABLE course_rating (
     rating_id INT AUTO_INCREMENT PRIMARY KEY,
     rated_by INT NOT NULL,
@@ -158,6 +174,7 @@ CREATE TABLE course_rating (
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
+-- Creating the notification table
 CREATE TABLE notification (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
     message TEXT NOT NULL,
@@ -168,6 +185,7 @@ CREATE TABLE notification (
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE SET NULL
 );
 
+-- Creating the student_notification table
 CREATE TABLE student_notification (
     student_notification_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -177,15 +195,18 @@ CREATE TABLE student_notification (
     FOREIGN KEY (notification_id) REFERENCES notification(notification_id) ON DELETE CASCADE
 );
 
+-- Creating the session table
 CREATE TABLE session (
     session_id INT AUTO_INCREMENT PRIMARY KEY,
     teacher_id INT NOT NULL,
     course_id INT NOT NULL,
     session_date DATE NOT NULL,
+    session_link VARCHAR(255),
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
+-- Creating the hiring_request table
 CREATE TABLE hiring_request (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     teacher_id INT NOT NULL,
@@ -196,7 +217,6 @@ CREATE TABLE hiring_request (
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE,
     FOREIGN KEY (reviewed_by) REFERENCES admin(admin_id) ON DELETE SET NULL
 );
-
 
 -- Insert into Student
 INSERT INTO student (name, password, email) VALUES
@@ -222,7 +242,6 @@ INSERT INTO course (course_name, course_description, teacher_id, num_assessments
 ('Database Management with SQL', 'Learn how to design and manage databases using SQL', 4, 3, 'Webdesign.avif', 300),
 ('Mobile App Development with Kotlin', 'Create Android apps using Kotlin programming language', 5, 5, 'Webdesign.avif', 300);
 
-
 -- Insert into Parent 
 INSERT INTO parent (name, email, password, student_id) VALUES
 ('Parent 1', 'parent1@gmail.com', 'hashedpassword123', 1),
@@ -239,18 +258,17 @@ INSERT INTO admin (name, email, password) VALUES
 ('Admin 4', 'admin4@gmail.com', 'hashedadminpassword'),
 ('Admin 5', 'admin5@gmail.com', 'hashedadminpassword');
 
-INSERT INTO quiz (course_id, title, max_score, post_date, deadline) VALUES
-(1, 'Python Basics Quiz', 100, '2024-01-01', '2024-01-07'),
-(1, 'Advanced Python Quiz', 150, '2024-01-10', '2024-01-17'),
-(2, 'HTML Basics Quiz', 100, '2024-01-02', '2024-01-08');
+-- Insert into Quiz with letter-based options
+INSERT INTO quiz (course_id, title, max_score, post_date, deadline, question, answer, option_a, option_b, option_c, option_d) VALUES
+(1, 'Python Basics Quiz', 100, '2024-01-01', '2024-01-07', 'What is Python?', 'A', 'A programming language', 'A type of snake', 'A type of software', 'A type of fruit'),
+(1, 'Advanced Python Quiz', 150, '2024-01-10', '2024-01-17', 'What does PEP 8 describe?', 'A', 'Python coding conventions', 'Python libraries', 'Python versions', 'Python frameworks'),
+(2, 'HTML Basics Quiz', 100, '2024-01-02', '2024-01-08', 'What does HTML stand for?', 'A', 'Hypertext Markup Language', 'Hyperlink Text Markup Language', 'Hypertextual Markup Language', 'Home Text Markup Language');
 
-
+-- Insert into Student_Quiz_Progress
 INSERT INTO student_quiz_progress (student_id, quiz_id, current_score, status, completion_date) VALUES
 (1, 1, 90, 'completed', '2024-01-06'),
 (2, 1, 70, 'in_progress', NULL),
 (1, 2, 120, 'completed', '2024-01-16');
-
-
 
 -- Insert into Enrollment
 INSERT INTO enrollment (course_id, student_id, enrollment_date) VALUES
@@ -268,7 +286,7 @@ INSERT INTO payment (student_id, course_id, amount, payment_date, card_last_four
 (4, 4, 300.00, '2024-11-04', '1121', 8, 2024, '321'),
 (5, 5, 300.00, '2024-11-05', '3141', 12, 2027, '654');
 
--- Insert into Course_content
+-- Insert into Course_Content
 INSERT INTO course_content (course_id, title, content_type, post_date) VALUES
 (1, 'Python Basics', 'PDF', '2024-11-01'),
 (2, 'HTML Structure', 'PowerPoint', '2024-11-02'),
@@ -276,7 +294,7 @@ INSERT INTO course_content (course_id, title, content_type, post_date) VALUES
 (4, 'SQL Queries', 'PDF', '2024-11-04'),
 (5, 'Kotlin Basics', 'PowerPoint', '2024-11-05');
 
--- Insert into Course_assessment
+-- Insert into Course_Assessment
 INSERT INTO course_assessment (course_id, title, max_score, post_date, deadline) VALUES
 (1, 'Basic Python Quiz', 100, '2024-11-01', '2024-11-10'),
 (2, 'HTML/CSS Project', 100, '2024-11-02', '2024-11-12'),
@@ -284,7 +302,7 @@ INSERT INTO course_assessment (course_id, title, max_score, post_date, deadline)
 (4, 'SQL Database Test', 100, '2024-11-04', '2024-11-14'),
 (5, 'Kotlin Android App', 100, '2024-11-05', '2024-11-15');
 
--- Insert into Student_progress
+-- Insert into Student_Progress
 INSERT INTO student_progress (student_id, assessment_id, status, completion_date, score) VALUES
 (1, 1, 'pass', '2024-11-05', 85),
 (2, 2, 'fail', '2024-11-06', 40),
@@ -300,6 +318,7 @@ INSERT INTO badge (badge_name, badge_description) VALUES
 ('SQL Master', 'Awarded for mastering SQL queries and database management'),
 ('Kotlin Developer', 'Awarded for completing Android development with Kotlin');
 
+-- Insert into Student_Badge
 INSERT INTO student_badge (student_id, badge_id, date_awarded) VALUES
 (1, 1, '2024-11-06'),
 (2, 2, '2024-11-07'),
@@ -307,7 +326,7 @@ INSERT INTO student_badge (student_id, badge_id, date_awarded) VALUES
 (4, 4, '2024-11-09'),
 (5, 5, '2024-11-10');
 
--- Insert into Course_rating
+-- Insert into Course_Rating
 INSERT INTO course_rating (rated_by, course_id, rating, feedback) VALUES
 (1, 1, 5, 'Excellent course, learned a lot about Python'),
 (2, 2, 3, 'The course was good, but could use more examples'),
@@ -315,10 +334,12 @@ INSERT INTO course_rating (rated_by, course_id, rating, feedback) VALUES
 (4, 4, 2, 'The course was a bit too basic for my level'),
 (5, 5, 5, 'Loved the course, especially the Android project');
 
+-- Insert into Notification
 INSERT INTO notification (message, created_at, course_id, teacher_id) VALUES
 ('New Python Course Available', '2024-01-01 12:00:00', 1, 1),
 ('HTML Quiz Results Available', '2024-01-02 13:00:00', 2, 2);
 
+-- Insert into Student_Notification
 INSERT INTO student_notification (student_id, notification_id, is_pushed) VALUES
 (1, 1, true),
 (2, 2, true),
@@ -326,13 +347,15 @@ INSERT INTO student_notification (student_id, notification_id, is_pushed) VALUES
 (4, 2, false),
 (5, 1, true);
 
-INSERT INTO session (teacher_id, course_id, session_date) VALUES
-(1, 1, '2024-11-06'),
-(2, 2, '2024-11-07'),
-(3, 3, '2024-11-08'),
-(4, 4, '2024-11-09'),
-(5, 5, '2024-11-10');
+-- Insert into Session
+INSERT INTO session (teacher_id, course_id, session_date, session_link) VALUES
+(1, 1, '2024-11-06', 'https://sessionlink.com/1'),
+(2, 2, '2024-11-07', 'https://sessionlink.com/2'),
+(3, 3, '2024-11-08', 'https://sessionlink.com/3'),
+(4, 4, '2024-11-09', 'https://sessionlink.com/4'),
+(5, 5, '2024-11-10', 'https://sessionlink.com/5');
 
+-- Insert into Hiring_Request
 INSERT INTO hiring_request (teacher_id, status, request_date, reviewed_by, reviewed_date) VALUES
 (1, 'approved', '2024-10-01', 1, '2024-10-05'),
 (2, 'pending', '2024-10-02', NULL, NULL),
@@ -340,5 +363,3 @@ INSERT INTO hiring_request (teacher_id, status, request_date, reviewed_by, revie
 (4, 'approved', '2024-10-04', 3, '2024-10-07'),
 (5, 'pending', '2024-10-05', NULL, NULL);
 
-ALTER TABLE session
-ADD COLUMN session_link VARCHAR(255) AFTER session_date;
