@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+  @apply
+  text-4xl
+  font-semibold
+}
+
+h2 {
+  @apply
+  text-xl
+  font-semibold
+}
+
+html, body, #root {
+  @apply
+  h-full
+}
+
+table {
+  @apply
+  shadow
+}
+
+th, td {
+  @apply
+  py-2 px-4
+  border
+  hover:opacity-75
+  transition
+  duration-150
+}
+
+th {
+  @apply
+  bg-gray-100
+}

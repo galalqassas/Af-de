@@ -1,0 +1,134 @@
+/* AnnouncementsAndTeachers.css */
+.announcements-and-teachers {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 25%;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.announcements {
+  margin-bottom: 20px;
+}
+
+.announcements h2,
+.teachers h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.updates {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.announcement-card,
+.teacher-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.announcement-card:hover,
+.teacher-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.announcement-icon {
+  font-size: 1.2rem;
+  color: #7c4dff;
+}
+
+.announcement-time {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.announcement-body {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.teachers h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.teacher-card {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.teacher-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.teacher-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.teacher-card h4 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.teacher-card .text-muted {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.teacher-card .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.teacher-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.no-teachers {
+  text-align: center;
+  font-size: 1rem;
+  color: #777;
+}

@@ -1,0 +1,172 @@
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f7fc;
+  font-family: Arial, sans-serif;
+  padding: 0 20px;
+}
+
+.authCard {
+  display: flex;
+  width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: white;
+}
+
+
+.left {
+  flex: 1;
+  padding: 30px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.right {
+  flex: 1;
+  background: linear-gradient(135deg, #7c4dff, #8e24aa); /* Updated gradient */
+  color: white;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.title {
+  font-size: 30px; 
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #7c4dff; 
+  text-align: center; 
+}
+
+
+.socialLogin button {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #c73f00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.socialLogin button:hover {
+  background: #ff725a; 
+}
+
+
+.or {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+
+.form input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form input:focus {
+  border: 1px solid #7c4dff;
+  box-shadow: 0 0 5px rgba(124, 77, 255, 0.4);
+  outline: none;
+}
+
+
+.forgot {
+  font-size: 14px;
+  color: #6a1b9a;
+  cursor: pointer;
+  margin: 10px 0;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.forgot:hover {
+  color: #7c4dff;
+}
+
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #7c4dff; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: #6a1b9a;
+  transform: scale(1.05);
+}
+
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.right h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.right p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .authCard {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .left, .right {
+    padding: 20px;
+  }
+}
+
+.roleDropdown {
+  margin-bottom: 20px; 
+  padding: 10px; 
+  width: 100%; 
+  border-radius: 5px; 
+  border: 1px solid #ccc; 
+  font-size: 16px; 
+}

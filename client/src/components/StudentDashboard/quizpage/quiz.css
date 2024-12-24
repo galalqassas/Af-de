@@ -1,0 +1,147 @@
+/* Global CSS - Use the root variables for consistency */
+:root {
+    --primary: #b45db8; /* Purple */
+    --primary-hover: #9b4d9a; /* Darker Purple */
+    --background: #f5f5f5;
+    --text-color: #000000;
+    --font-family: Arial, sans-serif;
+  }
+  
+  /* Apply to body for a unified styling across the page */
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--background);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  
+  /* Global Reset */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Top bar styles */
+  .topBar {
+    width: 100%;
+    background-color: var(--primary);
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Start quiz container styles */
+  .startContainer {
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .startContainer h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .startContainer .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(190, 193, 209);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .startContainer .button:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  /* Quiz container styles */
+  .quizContainer {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Question container styles */
+  .questionContainer {
+    margin-top: 20px;
+  }
+  
+  .questionContainer h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  /* Options container styles */
+  .optionsContainer {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Option buttons - styled as rectangles with purple color */
+  .optionButton {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    margin: 10px 0;
+    font-size: 18px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .optionButton:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.02);
+  }
+  
+  /* Result container styles */
+  .resultContainer {
+    margin-top: 30px;
+  }
+  
+  .resultContainer h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  .resultContainer p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #000000;
+  }
+  
+  /* Button styles */
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: var(--primary-hover);
+  }
+  

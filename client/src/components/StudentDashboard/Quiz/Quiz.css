@@ -1,0 +1,118 @@
+.quiz-container {
+    margin-left: 250px; 
+    padding: 40px 350px; 
+    font-family: "Poppins", sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    box-sizing: border-box;
+}
+
+.quiz-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #7c4dff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.question-container {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.question-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.option {
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.option:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    background: #7c4dff;
+    color: white;
+    font-weight: bold;
+}
+
+.submit-button {
+    margin-top: 30px;
+    background: #7c4dff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background: #5c34d4;
+    transform: scale(1.05);
+}
+
+.score-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        margin-left: 0; 
+        padding: 20px;
+    }
+
+    .question-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .quiz-title {
+        font-size: 2rem;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+    }
+}

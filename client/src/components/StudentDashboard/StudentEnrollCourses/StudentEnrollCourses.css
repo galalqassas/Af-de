@@ -1,0 +1,78 @@
+/* StudentEnrollCourses.css */
+.student-courses {
+    margin-left: 250px;
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    background-color: transparent;
+  }
+  
+  .courses-container h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .courses-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .course-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: calc(33.33% - 20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .course-thumbnail img {
+    width: 100%;
+    border-radius: 10px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .course-details h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .course-details p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .course-details .price {
+    font-size: 1.2rem;
+    color: #7c4dff;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .student-courses {
+      margin-left: 0;
+      padding: 10px;
+    }
+  
+    .courses-list {
+      gap: 10px;
+    }
+  
+    .course-card {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .course-card {
+      width: 100%;
+    }
+  }
+  

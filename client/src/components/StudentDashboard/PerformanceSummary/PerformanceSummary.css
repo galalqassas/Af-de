@@ -1,0 +1,44 @@
+.performance-summary {
+    margin: 20px 0;
+  }
+  
+  .performance-summary h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .summary-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card h3 {
+    font-size: 1rem;
+    color: #7c4dff;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  

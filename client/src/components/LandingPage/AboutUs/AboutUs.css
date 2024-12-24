@@ -1,0 +1,95 @@
+.about-us {
+  position: relative;
+  padding: 0px;
+  margin-top: 130px;
+}
+
+.about-us:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  width: 84%;
+  height: 100%;
+  background-color: #f1f0fe;
+  content: '';
+  border-top-left-radius: 500px;
+  border-bottom-left-radius: 500px;
+}
+
+.accordion {
+  margin-top: -40px;
+  margin-bottom: -40px;
+  background-color: #7a6ad8;
+  border-radius: 60px; 
+  padding: 120px 80px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.accordion-item {
+  background-color: #fff;
+  border-radius: 60px ; 
+  margin-bottom: 40px;
+  border: none;
+}
+
+.accordion-item .accordion-button {
+  outline: none;
+  box-shadow: none;
+  border-radius: 60px ;
+  padding: 20px 30px; 
+  font-size: 18px; 
+  font-weight: bold; 
+  color: #333; 
+  transition: none; 
+}
+
+.accordion-button:not(.collapsed) {
+  color: #7a6ad8;
+  background-color: #fff ; 
+  box-shadow: none; 
+}
+
+.accordion-button::after {
+  display: none; 
+}
+
+.accordion-button:focus {
+  box-shadow: none; 
+  background-color: inherit; 
+}
+
+.accordion-body {
+  padding: 20px 30px; 
+  font-size: 16px; 
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+.about-us .section-heading {
+  margin-left: 60px;
+  margin-bottom: 0px;
+}
+
+.about-us .section-heading h6 {
+  font-size: 14px;
+  color: #7a6ad8;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.about-us .section-heading h2 {
+  font-size: 28px;
+  font-weight: 700; 
+  color: #333; 
+}
+
+.about-us .section-heading p {
+  font-size: 16px;
+  color: #555; 
+}
+
+.about-us .section-heading .main-button {
+  display: none; 
+}

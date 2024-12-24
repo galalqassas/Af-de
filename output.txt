@@ -1,0 +1,316 @@
+app.py
+from flask import Flask
+from flask_cors import CORS
+from utils.db import db
+from routes.courses import course_bp
+from routes.teachers import teacher_bp  
+from routes.feedback import feedback_bp  
+from config import Config
+
+app = Flask(__name__)
+
+# Configuration
+app.config.from_object(Config)
+
+# Initialize extensions
+db.init_app(app)
+CORS(app)  # Enable Cross-Origin Resource Sharing for frontend-backend communication
+
+# Register Blueprints
+app.register_blueprint(course_bp)
+app.register_blueprint(teacher_bp)  # Register the teacher blueprint
+app.register_blueprint(feedback_bp)  # Register the feedback blueprint
+
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()  # Ensure tables are created
+    app.run(debug=True)
+
+badge.py
+from utils.db import db
+
+class Badge(db.Model):
+    __tablename__ = 'badge'
+    badge_id = db.Column(db.Integer, primary_key=True)
+    badge_name = db.Column(db.String(100), nullable=False)
+    badge_description = db.Column(db.Text)
+
+config.py
+import os
+import pymysql
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+class Config:
+    SECRET_KEY = os.getenv("SECRET_KEY", "default_secret")
+    MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
+    MYSQL_USER = os.getenv("MYSQL_USER", "root")
+    MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
+    MYSQL_DB = os.getenv("MYSQL_DB", "test_db")
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Test MySQL Connection
+try:
+    connection = pymysql.connect(
+        host=Config.MYSQL_HOST,
+        user=Config.MYSQL_USER,
+        password=Config.MYSQL_PASSWORD,
+        database=Config.MYSQL_DB
+    )
+    print("MySQL connection successful!")
+except Exception as e:
+    print(f"Failed to connect to MySQL: {e}")
+finally:
+    if 'connection' in locals():
+        connection.close()
+
+course.py
+from utils.db import db
+
+COURSE_FOREIGN_KEY = 'course.course_id'  
+
+class Course(db.Model):
+    __tablename__ = 'course'
+    course_id = db.Column(db.Integer, primary_key=True)
+    course_name = db.Column(db.String(100), nullable=False)
+    course_description = db.Column(db.Text)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.teacher_id'))
+    price = db.Column(db.Float, nullable=False)  
+    image_url = db.Column(db.String(255), nullable=False) 
+    
+    # Relationships
+    enrollments = db.relationship('Enrollment', backref='course', lazy=True)
+    contents = db.relationship('CourseContent', backref='course', lazy=True)
+    assessments = db.relationship('CourseAssessment', backref='course', lazy=True)
+    ratings = db.relationship('CourseRating', back_populates='course', lazy=True)  # Use back_populates here
+
+class CourseContent(db.Model):
+    __tablename__ = 'course_content'
+    content_id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(COURSE_FOREIGN_KEY), nullable=False)  
+    title = db.Column(db.String(100), nullable=False)
+    content_type = db.Column(db.String(50), nullable=False)
+    post_date = db.Column(db.Date, nullable=False)
+
+class CourseAssessment(db.Model):
+    __tablename__ = 'course_assessment'
+    assessment_id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(COURSE_FOREIGN_KEY), nullable=False)  
+    title = db.Column(db.String(100), nullable=False)
+    max_score = db.Column(db.Integer, nullable=False)
+    post_date = db.Column(db.Date, nullable=False)
+    deadline = db.Column(db.Date, nullable=False)
+
+class CourseRating(db.Model):
+    __tablename__ = 'course_rating'
+    rating_id = db.Column(db.Integer, primary_key=True)
+    rated_by = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey(COURSE_FOREIGN_KEY), nullable=False)  
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.Text)
+    
+    student = db.relationship('Student', backref='course_ratings', lazy=True)
+    course = db.relationship('Course', back_populates='ratings', lazy=True)  # Use back_populates here
+
+courses.py
+from flask import Blueprint, jsonify
+from models.course import Course
+
+course_bp = Blueprint('course', __name__)
+
+@course_bp.route('/courses', methods=['GET'])
+def get_courses():
+    courses = Course.query.all()
+    return jsonify([{
+        'course_id': c.course_id,
+        'course_name': c.course_name,
+        'description': c.course_description,
+        'price': c.price,
+        'image_url': c.image_url
+    } for c in courses])
+
+enrollment.py
+from utils.db import db
+
+class Enrollment(db.Model):
+    __tablename__ = 'enrollment'
+    enrollment_id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.course_id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    enrollment_date = db.Column(db.Date, nullable=False)
+
+class Payment(db.Model):
+    __tablename__ = 'payment'
+    payment_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.course_id'), nullable=False)
+    amount = db.Column(db.Numeric(10, 2), nullable=False)
+    payment_date = db.Column(db.Date, nullable=False)
+
+extensions.py
+
+feedback.py
+from flask import Blueprint, jsonify
+from models import CourseRating
+
+feedback_bp = Blueprint('feedback', __name__)
+
+@feedback_bp.route('/ratings', methods=['GET'])
+def get_all_feedbacks():
+    feedbacks = CourseRating.query.all()  
+    feedback_list = []
+    
+    for feedback in feedbacks:
+        feedback_list.append({
+            'rating_id': feedback.rating_id,
+            'student_name': feedback.student.name,  
+            'rating': feedback.rating,
+            'comment': feedback.comment,
+            'course_name': feedback.course.course_name  
+        })
+    
+    return jsonify(feedback_list)
+
+notification.py
+from utils.db import db
+
+class Notification(db.Model):
+    __tablename__ = 'notification'
+    notification_id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+
+class StudentNotification(db.Model):
+    __tablename__ = 'student_notification'
+    student_notification_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    notification_id = db.Column(db.Integer, db.ForeignKey('notification.notification_id'), nullable=False)
+    is_pushed = db.Column(db.Boolean, default=False)
+
+output.txt.txt
+
+parent.py
+
+progress.py
+from utils.db import db
+
+class StudentProgress(db.Model):
+    __tablename__ = 'student_progress'
+    progress_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    assessment_id = db.Column(db.Integer, db.ForeignKey('course_assessment.assessment_id'), nullable=False)
+    status = db.Column(db.Enum('pass', 'fail'), nullable=False)
+    completion_date = db.Column(db.Date)
+    score = db.Column(db.Integer)
+
+class StudentBadge(db.Model):
+    __tablename__ = 'student_badge'
+    student_badge_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    badge_id = db.Column(db.Integer, db.ForeignKey('badge.badge_id'), nullable=False)
+    date_awarded = db.Column(db.Date, nullable=False)
+
+student.py
+
+teachers.py
+from flask import Blueprint, jsonify
+from models.user import Teacher
+
+teacher_bp = Blueprint('teacher', __name__)
+
+@teacher_bp.route('/teachers', methods=['GET'])
+def get_teachers():
+    teachers = Teacher.query.all()
+    teachers_list = [
+        {
+            "teacher_id": teacher.teacher_id,
+            "name": teacher.name,
+            "designation": teacher.designation,
+            "profile_picture": teacher.profile_picture,
+            "facebook_url": teacher.facebook_url,
+            "twitter_url": teacher.twitter_url,
+            "linkedin_url": teacher.linkedin_url,
+        }
+        for teacher in teachers
+    ]
+    return jsonify(teachers_list)
+
+user.py
+from utils.db import db
+
+class BaseUser(db.Model):
+    __abstract__ = True
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+
+class Student(BaseUser):
+    __tablename__ = 'student'
+    student_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+
+    # Relationships
+    enrollments = db.relationship('Enrollment', backref='student', lazy=True) #lazy=True is a shorthand for lazy='select' and it means "Load the related data only when it is accessed"
+    payments = db.relationship('Payment', backref='student', lazy=True)
+    badges = db.relationship('StudentBadge', backref='student', lazy=True)
+
+class Teacher(BaseUser):
+    __tablename__ = 'teacher'
+    teacher_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    profile_picture = db.Column(db.String(255))  
+    designation = db.Column(db.String(100))     
+    facebook_url = db.Column(db.String(255))   
+    twitter_url = db.Column(db.String(255))    
+    linkedin_url = db.Column(db.String(255))    
+
+    # Relationships
+    courses = db.relationship('Course', backref='teacher', lazy=True)
+
+class Parent(BaseUser):
+    __tablename__ = 'parent'
+    parent_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'))
+
+class Admin(BaseUser):
+    __tablename__ = 'admin'
+    admin_id = db.Column(db.Integer, primary_key=True)
+
+__init.py
+
+__init__.py
+from models.user import Student, Teacher, Parent, Admin
+from models.course import Course, CourseContent, CourseAssessment, CourseRating
+from models.enrollment import Enrollment, Payment
+from models.progress import StudentProgress, StudentBadge
+from models.notification import Notification, StudentNotification
+from models.badge import Badge
+
+____.py
+import os
+
+def list_files_with_content(directory, output_file):
+  """
+  Lists files in the given directory along with their content, 
+  and writes the output to a text file.
+
+  Args:
+    directory: The directory to list files from.
+    output_file: The name of the output text file.
+  """
+
+  with open(output_file, 'w') as f:
+    for filename in os.listdir(directory):
+      if os.path.isfile(os.path.join(directory, filename)):
+        f.write(filename + '\n')
+        try:
+          with open(os.path.join(directory, filename), 'r') as file:
+            content = file.read()
+            f.write('{content}\n'.format(content=content))
+        except UnicodeDecodeError:
+          f.write("{content}\n".format(content="Binary file content not shown"))
+
+if __name__ == "__main__":
+  list_files_with_content(r'C:\Users\PC\Desktop\python print directory files', 'output.txt')

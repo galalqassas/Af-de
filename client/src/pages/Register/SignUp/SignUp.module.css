@@ -1,0 +1,186 @@
+.signupPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #f4f7fc;
+  font-family: Arial, sans-serif;
+}
+
+.authCard {
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+.left {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.right {
+  flex: 1;
+  background: linear-gradient(135deg, #7c4dff, #8e24aa);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+
+
+.title {
+  font-size: 2.5rem;
+  color: #7c4dff; 
+  margin-bottom: 20px;
+}
+
+
+.right .btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #7c4dff; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.right .btn:hover {
+  background: #6a1b9a;
+  transform: scale(1.05);
+}
+
+
+.error, .success {
+  font-size: 0.9rem;
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #4caf50; 
+}
+
+
+.socialSignup .google {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #c73f00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.socialSignup button:hover {
+  background: #f46046; 
+}
+
+
+.or {
+  margin: 20px 0;
+  color: #888;
+  font-size: 1rem;
+}
+
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+ input:focus {
+  border: 1px solid #7c4dff;
+  box-shadow: 0 0 5px rgba(124, 77, 255, 0.4);
+  outline: none;
+}
+
+
+.dropdownGroup {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.dropdownLabel {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.left .btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #7c4dff; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: #6a1b9a;
+  transform: scale(1.05);
+}
+
+.error {
+  color: #ff0000; 
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.success {
+  color: #4caf50; 
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.googleButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.roleDropdown {
+  margin-bottom: 20px; 
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}

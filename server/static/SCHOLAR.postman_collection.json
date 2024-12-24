@@ -1,0 +1,293 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SCHOLAR API",
+    "description": "API documentation for the SCHOLAR system",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Allows new users (students, teachers, parents) to sign up.",
+        "operationId": "signup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email", "password", "role"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Authenticates users by email and password.",
+        "operationId": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "summary": "Sends a password reset email.",
+        "operationId": "forgot-password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "role"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Logs the user out by clearing the session.",
+        "operationId": "logout"
+      }
+    },
+    "/auth/reset-password/{token}": {
+      "post": {
+        "summary": "Resets the user’s password using a reset token.",
+        "operationId": "reset-password",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "new_password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["new_password"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "summary": "Fetches the list of available courses.",
+        "operationId": "get-courses"
+      }
+    },
+    "/dashboard/students-enrolled": {
+      "get": {
+        "summary": "Fetches students enrolled for a given teacher.",
+        "operationId": "get-students-enrolled",
+        "parameters": [
+          {
+            "name": "teacher_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/dashboard/money-obtained": {
+      "get": {
+        "summary": "Fetches money obtained by a teacher.",
+        "operationId": "get-money-obtained",
+        "parameters": [
+          {
+            "name": "teacher_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/dashboard/student-performance/{student_id}": {
+      "get": {
+        "summary": "Fetches performance details of a particular student.",
+        "operationId": "get-student-performance",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/dashboard/teacher-performance/{teacher_id}": {
+      "get": {
+        "summary": "Fetches performance details of a particular teacher.",
+        "operationId": "get-teacher-performance",
+        "parameters": [
+          {
+            "name": "teacher_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/auth/change-password": {
+      "post": {
+        "summary": "Allows a user to change their password.",
+        "operationId": "change-password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "old_password": {
+                    "type": "string"
+                  },
+                  "new_password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["old_password", "new_password"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{course_id}": {
+      "get": {
+        "summary": "Fetches details of a specific course.",
+        "operationId": "get-course-details",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/courses/{course_id}/enroll": {
+      "post": {
+        "summary": "Enrolls a user in a specific course.",
+        "operationId": "enroll-in-course",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["user_id"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students/{student_id}/courses": {
+      "get": {
+        "summary": "Fetches all courses a student is enrolled in.",
+        "operationId": "get-student-courses",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

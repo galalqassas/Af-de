@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+  background: #f3f4f6;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(45deg, #7c4dff, #2b2d42);
+  padding-top: 40px;
+  position: fixed;
+  transition: width 0.5s ease, background 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 0 20px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.3s ease, padding-left 0.3s ease;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.nav-icon {
+  font-size: 16px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 15px;
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+.nav-item:hover i {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #fff;
+  transition: transform 0.3s ease;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.nav-item:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar.collapsed .nav-item span,
+.sidebar.collapsed .nav-item .nav-icon {
+  display: none;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  align-items: flex-start;
+}
+
+.logout {
+  margin-top: 20px;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  width: 100%;
+  transition: background 0.3s ease, padding-left 0.3s ease;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+.logout-button .nav-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}

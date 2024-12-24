@@ -1,0 +1,38 @@
+/* fileupload.css */
+.App {
+    font-family: Arial, sans-serif;
+  }
+  
+  .app-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .file-uploader {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+  }
+  
+  .file-div {
+    display: flex;
+    width: 85%;
+  }
+  
+  .attachment-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .file-name {
+    margin-left: 0.5rem;
+    font-size: 14px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  

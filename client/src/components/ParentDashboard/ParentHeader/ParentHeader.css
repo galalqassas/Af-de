@@ -1,0 +1,78 @@
+.parent-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #7c4dff, #2b2d42);
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.greeting {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.greeting h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.greeting p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.children-list {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.children-list.single-child {
+    justify-content: center;
+}
+
+.children-list.multiple-children {
+    justify-content: space-evenly;
+}
+
+.child-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.child-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #7c4dff;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.child-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.child-icon i {
+    font-size: 3.5rem;
+    color: #7c4dff;
+}
+
+.child-name {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: white;
+}

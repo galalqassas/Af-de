@@ -1,0 +1,38 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore migrations
+migrations/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Ignore environment and session files
+server/.env
+server/flask_session/
+
+# Sensitive configuration files
+server/config.py
+
+# Ignore env file
+env
+
+# pytest
+.pytest_cache
+.coverage
+/server/flask_session

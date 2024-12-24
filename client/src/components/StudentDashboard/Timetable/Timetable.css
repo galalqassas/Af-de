@@ -1,0 +1,104 @@
+.timetable-container {
+    margin: 20px 20px 0 270px; 
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.timetable-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #7c4dff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.timetable-table thead {
+    background-color: #7c4dff;
+    color: white;
+}
+
+.timetable-table th {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    letter-spacing: 1px; 
+}
+
+
+.timetable-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+    font-size: 1rem;
+}
+
+.timetable-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.no-sessions {
+    color: #888;
+    font-size: 1.2rem;
+    padding: 20px;
+    text-align: center;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.scrollbar-container {
+    overflow-y: auto;
+    max-height: 350px;
+}
+
+.timetable-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.timetable-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 12px;
+}
+
+.timetable-container::-webkit-scrollbar-thumb {
+    background: #7c4dff;
+    border-radius: 12px;
+}
+
+.timetable-container::-webkit-scrollbar-thumb:hover {
+    background: #5b35e5;
+}
+
+@media (max-width: 768px) {
+    .timetable-container {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .timetable-title {
+        font-size: 1.5rem;
+    }
+
+    .timetable-table th,
+    .timetable-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}

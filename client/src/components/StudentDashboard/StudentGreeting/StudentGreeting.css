@@ -1,0 +1,62 @@
+/* StudentGreeting.css */
+.greeting {
+    padding: 20px 15px;
+    background-color: transparent;
+    margin-left: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .greeting .container {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .greeting-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 260px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .greeting-card h3 {
+    font-size: 1.3rem;
+    color: #7c4dff;
+    margin-bottom: 12px;
+  }
+  
+  .greeting-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .greeting {
+      margin-left: 0;
+    }
+  
+    .greeting-card {
+      width: 90%;
+      height: auto;
+    }
+  
+    .greeting-card h3 {
+      font-size: 1.1rem;
+    }
+  
+    .greeting-card p {
+      font-size: 0.9rem;
+    }
+  }
+  

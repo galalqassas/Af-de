@@ -1,0 +1,40 @@
+footer {
+    margin-top: 150px;
+    position: relative;
+    background-color: #7a6ad8; 
+    vertical-align: middle;
+    min-height: 150px;
+    border-radius: 150px 150px 0 0;
+  }
+  
+  footer p {
+    text-align: center;
+    line-height: 150px; 
+    color: #fff; 
+    font-weight: 400;
+  }
+  
+  footer p a {
+    color: #fff; 
+    transition: all 0.3s; 
+    position: relative;
+    z-index: 3; 
+  }
+  
+  footer p a:hover {
+    opacity: 0.75; 
+  }
+  
+  footer::before {
+    background: url(../assets/style1.png); 
+    position: absolute;
+    left: 30px; 
+    transform: rotate(180deg); 
+    opacity: 1;
+    bottom: 0; 
+    width: 318px; 
+    height: 119px; 
+    content: ''; 
+    z-index: 2; 
+  }
+  
